@@ -1,0 +1,43 @@
+  #include<stdio.h>  
+float fun(float x) {  
+    return x/ (1 + x);   
+}  
+  
+int main() {  
+    int n, lb, ub;  
+    float y[20], h, x[20], IS = 0.0;  
+    printf("Enter the number of intervals : ");  
+    scanf("%d", &n);  
+    if (n % 2 != 0) {  
+        printf("Error: Number of intervals for Simpson's 1/3 rule.\n");  
+        return 1;   
+    }  
+    printf("Enter the lower bound: ");  
+    scanf("%d", &lb);  
+    printf("Enter the upper bound: ");  
+    scanf("%d", &ub);  
+    h = (float)(ub - lb) / n;  
+    for (int i = 0; i <= n; i++) {  
+        x[i] = lb + i * h;     
+        y[i] = fun(x[i]);      
+    }  
+    float es = 0.0, os = 0.0;  
+    for (int i = 1; i < n; i++) {  
+        if (i % 2 == 0) {  
+            es += y[i];   
+        } else {  
+            os += y[i];   
+        }  
+    }  
+  
+    IS = (h / 3) * (y[0] + y[n] + 2 * es + 4 * os); 
+    printf("The value of the integral is: %f\n", IS);  
+  
+    return 0;  
+} 
+
+// OUTPUT:
+// Enter the number of intervals (must be even): 6 
+// Enter the lower bound: 0  
+// Enter the upper bound: 1  
+// The value of the integral is: 0.306830 
